@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/common/code_block.css">
+    <link rel="stylesheet" href="/static/css/common/all.css">
+    <link rel="stylesheet" href="/static/css/common/style.css">
+    <link rel="stylesheet" href="/static/css/common/header.css">
+    <link rel="stylesheet" href="/static/css/common/zuzu.css">
+    <link rel="stylesheet" href="/static/css/posts/posts.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/static/js/common/common.js"></script>
+    <title>my page</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    {% block extra_scripts %}
+    {% endblock extra_scripts%}
+
+</head>
+
+
+
+<body>
+
+
+    {% include 'common/utils.html' %}
+    {% include 'common/header.html' %}
+    {% include 'common/sidebar.html' %}
+
+
+
+
+
+
+    {% block content %}
+    {% endblock %}
+
+
+
+
+</body>
+
+</html>

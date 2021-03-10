@@ -1,0 +1,115 @@
+@import "../common/_settings.scss";
+
+
+#login {
+    display: flex;
+    margin-top: 150px;
+    max-width: 700px;
+}
+
+#login__form {
+    margin: 0 auto;
+    margin-top: 0;
+    width: 80%;
+}
+
+
+/* TITLE */
+#login__form__title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1d2943;
+}
+
+/* INPUT */
+#login__form__input {
+    margin: auto;
+    width: 100%;
+}
+
+#login__form__input__id {
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#login__form__input__pw {
+    margin-top: 2%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#login__form__option{
+    display: flex;
+    margin-top: 10px;
+}
+
+#login__form__option__remember {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    font-size: 0.8rem;
+}
+
+#login__form__option__remember__checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#login__form__option__remember__checkbox__icon{
+    color: white;
+    font-size: 7px;
+}
+
+#login__form__option__forget{
+    display: flex;
+    align-items: center;
+    margin:  0 0 0 auto;
+    cursor: pointer;
+}
+
+
+#login__form__forget {
+    text-align: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+#login__form__yet{
+    display: flex;
+    color: darkgray;
+    margin-top: 15px;
+    margin-left: 5px;
+    font-size: 0.9rem;
+}
+
+#login__form__yet__register{
+    font-weight: 700;
+    color: #4678F8;
+}
+
+
+#login__form__submit{
+    margin-top: 30px;
+}
+
+@include mobile{
+    #login{
+        margin-top: 20px;
+        font-size: 0.75rem;
+    }
+
+}
+
+
+@include tablet{
+    #login{
+        max-width: 75vw;
+    }
+
+}
+
+

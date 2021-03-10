@@ -1,0 +1,81 @@
+{% extends 'common/base.html' %}
+
+
+{% block content %}
+
+
+<div id="posts" class="zuzu__container">
+    
+    <div id="posts__title">
+        <div id="posts__title__img">
+            <img id="posts__title__img__style" src="/static/img/common/python.png" alt="" srcset="">
+        </div>
+        <div id="posts__title__text">
+            입력 / 출력
+        </div>
+    </div>
+
+<div class="posts__contents">
+<div class="posts__content">
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+<div class="posts__content__code" style="margin-top: 20vh; box-sizing: content-box;">
+<div class="posts__content__code__title" style="border-left: 5px #DD4C39 solid; padding-left: 10px; margin-bottom: 15px; font-size: 1.75rem; margin-left: 20px;">여러 입력 받기</div>
+<div class="posts__content__code__body posts__content__mode__body">
+<i class="far fa-copy posts__code__copy" data-copynum="1"></i>
+<div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  -->
+
+
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  -->
+<div class="posts__content__text posts__content__mode__body">
+<div class="zuzu__panel__green posts__content__text__body">
+<div class="zuzu__panel__title">예제 입력</div>
+
+<div class="zuzu__panel__content ">
+<pre class="zuzu__panel__content">
+3 4 5
+</pre>
+</div>
+</div>
+<div class="zuzu__panel__blue posts__content__text__body">
+    <div class="zuzu__panel__title">예제 출력</div>
+<pre class="zuzu__panel__content">
+*
+**
+***
+****
+*****
+</pre>
+</div>
+</div>
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  -->
+</div>
+</div>
+
+
+
+
+
+</div>
+
+
+<script>
+    document.querySelector(".posts__code__copy").addEventListener("click", function(e){
+      let tmp = e.target
+      let tempElem = document.createElement('textarea')
+      tempElem.value = e.target.parentNode.querySelector(".highlight > pre").innerText
+      document.body.appendChild(tempElem)
+      tempElem.select()
+      document.execCommand("copy")
+      document.body.removeChild(tempElem)
+    })
+</script>
+
+
+
+{% endblock %}
+
+

@@ -1,0 +1,383 @@
+{% extends 'common/base.html' %}
+
+
+{% block content %}
+<meta http-equiv="Cache-Control" content="no-cache">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="stylesheet" href="/static/css/common/all.css">
+<link rel="stylesheet" href="/static/css/accounts/register.css">
+
+<div id="register" class="zuzu__container">
+
+    <div id="register__title">회원 가입</div>
+    <div id="register__form">
+        <form autocomplete="off">
+            {% csrf_token %}
+
+            <!-- 아이디 -->
+            <div id="register__form__id" class="register__form__item">
+                <div class="register__form__item__label">아이디</div>
+                <div style="display: flex; margin-top: 10px;">
+                    <input id="register__form__id__input" class="zuzu__input" type="text" placeholder="아이디를 입력해 주세요."
+                        autocomplete='off' />
+                    <div id="register__form__id__input__unique">
+                        중복 확인
+                    </div>
+                </div>
+                <div id="register__form__id__feedback">
+                    <div id="register__form__id__feedback__valid" class="register__form__item__feedback__valid">
+                        좋습니다!
+                    </div>
+                    <div id="register__form__id__feedback__invalid" class="register__form__item__feedback__invalid">
+                        <i class="fas fa-exclamation-circle"></i> &nbsp;
+                        6~20글자의 소문자 영어로
+                        이루어져야합니다.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 비밀번호 -->
+
+            <div id="register__form__pw" class="register__form__item">
+                <div class="register__form__item__label">비밀번호</div>
+                <input style="margin-top: 10px;" id="register__form__pw__input" class="zuzu__input" type="password"
+                    placeholder="비밀번호를 입력해 주세요." />
+
+                <div id="register__form__pw__feedback">
+                    <div id="register__form__pw__feedback__valid" class="register__form__item__feedback__valid">
+                        좋습니다!
+                    </div>
+                    <div id="register__form__pw__feedback__invalid" class="register__form__item__feedback__invalid">
+                        <i class="fas fa-exclamation-circle"></i> &nbsp;
+                        숫자와 영문을 조합한 7~20자리를 입력해 주세요.
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 비밀번호 확인-->
+
+
+            <div id="register__form__pw__re" class="register__form__item">
+                <div class="register__form__item__label">비밀번호 확인</div>
+                <input style="margin-top: 10px;" id="register__form__pw__re__input" class="zuzu__input" type="password"
+                    placeholder="비밀번호를 다시 입력해 주세요." />
+
+                <div id="register__form__pw__re__feedback">
+                    <div id="register__form__pw__re__feedback__valid" class="register__form__item__feedback__valid">
+                        좋습니다!
+                    </div>
+                    <div id="register__form__pw__re__feedback__invalid" class="register__form__item__feedback__invalid">
+                        <i class="fas fa-exclamation-circle"></i> &nbsp;
+                        비밀번호가 일치하지 않습니다.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 이메일 -->
+
+            <div id="register__form__email" class="register__form__item">
+                <div class="register__form__item__label">이메일</div>
+                <input style="margin-top: 10px;" id="register__form__email__input" class="zuzu__input" type="text"
+                    placeholder="이메일을 입력해 주세요." autocomplete='off' />
+
+                <div id="register__form__email__feedback">
+                    <div id="register__form__email__feedback__valid" class="register__form__item__feedback__valid">
+                        좋습니다!
+                    </div>
+                    <div id="register__form__email__feedback__invalid" class="register__form__item__feedback__invalid">
+                        <i class="fas fa-exclamation-circle"></i> &nbsp;
+                        올바른 이메일을 입력해 주세요.
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+    <div id="register__form__option">
+        <div id="register__form__option__terms">
+            <div id="register__form__option__terms__checkbox" class="item zuzu__checkbox">
+                <i class="fas fa-check"></i>
+            </div>
+            <div> &nbsp;&nbsp; <span style="color: #334ACF; font-weight: 500;"
+                    onclick="window.location.href='/'">개인정보처리방침</span>에 동의합니다.
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="zuzu__btn zuzu__btn__disabled" id="register__form__submit">
+        회원 가입
+    </div>
+
+
+
+    <div id="register__form__already">
+        이미 회원가입 하셨나요?
+        <div id="register__form__already__login" onclick="window.location.href='/login'">
+            &nbsp;&nbsp;<span style="color: #4678F8;">로그인</span>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<!-- front -->
+<script>
+
+    let flag__id = 0
+    let flag__unique__id = 0
+    let flag__pw = 0
+    let flag__pw__re = 0
+    let flag__email = 0
+    let flag__terms = 0
+
+    function isValidId(str) {
+        let reg = /^[a-z0-9]{6,14}$/ // a~z 0~9 6~14자리
+        return reg.test(str)
+    }
+
+    function isValidPw(str) {
+        let reg = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{7,20}$/ // 영문 숫자 특수문자 중 2개 조합 7~20자리
+        return reg.test(str)
+    }
+
+    function isValidEmail(str) {
+        let reg = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        return reg.test(str);
+    }
+
+
+    function setValidFeedback(element) {
+        element.classList.add("zuzu__input__valid")
+        element.classList.remove("zuzu__input__invalid")
+    }
+
+    function setInvalidFeedback(element) {
+        element.classList.add("zuzu__input__invalid")
+        element.classList.remove("zuzu__input__valid")
+    }
+
+
+    /*  */
+
+
+    const clickCheckbox = (ele) => {
+        ele.classList.toggle("zuzu__checkbox__checked")
+    }
+
+    document.querySelector("#register__form__id__input").addEventListener("keyup", (e) => {
+        if (isValidId(e.target.value)) {
+            flag__id = 1
+            setValidFeedback(e.target)
+            block(document.querySelector("#register__form__id__feedback__valid"))
+            hide(document.querySelector("#register__form__id__feedback__invalid"))
+        }
+        else {
+            flag__id = 0
+            block(document.querySelector("#register__form__id__feedback__invalid"))
+            hide(document.querySelector("#register__form__id__feedback__valid"))
+            setInvalidFeedback(e.target)
+        }
+    })
+
+    document.querySelector("#register__form__pw__input").addEventListener("keyup", (e) => {
+        if (isValidPw(e.target.value)) {
+            if (document.querySelector("#register__form__pw__re__input").value !== '') {
+                if (document.querySelector("#register__form__pw__input").value == document.querySelector("#register__form__pw__re__input").value) {
+                    flag__pw__re = 1
+                    setValidFeedback(document.querySelector("#register__form__pw__re__input"))
+                    block(document.querySelector("#register__form__pw__re__feedback__valid"))
+                    hide(document.querySelector("#register__form__pw__re__feedback__invalid"))
+                }
+                else {
+                    flag__pw__re = 0
+                    setInvalidFeedback(document.querySelector("#register__form__pw__re__input"))
+                    block(document.querySelector("#register__form__pw__re__feedback__invalid"))
+                    hide(document.querySelector("#register__form__pw__re__feedback__valid"))
+                }
+            }
+            flag__pw = 1
+            setValidFeedback(e.target)
+            block(document.querySelector("#register__form__pw__feedback__valid"))
+            hide(document.querySelector("#register__form__pw__feedback__invalid"))
+        }
+        else {
+            flag__pw = 0
+            block(document.querySelector("#register__form__pw__feedback__invalid"))
+            hide(document.querySelector("#register__form__pw__feedback__valid"))
+            setInvalidFeedback(e.target)
+        }
+    })
+
+    document.querySelector("#register__form__pw__re__input").addEventListener("keyup", (e) => {
+        if (document.querySelector("#register__form__pw__input").value == (e.target.value)) {
+            flag__pw__re = 1
+            setValidFeedback(e.target)
+            block(document.querySelector("#register__form__pw__re__feedback__valid"))
+            hide(document.querySelector("#register__form__pw__re__feedback__invalid"))
+        }
+        else {
+            flag__pw__re = 0
+            block(document.querySelector("#register__form__pw__re__feedback__invalid"))
+            hide(document.querySelector("#register__form__pw__re__feedback__valid"))
+            setInvalidFeedback(e.target)
+        }
+    })
+
+    document.querySelector("#register__form__email__input").addEventListener("keyup", (e) => {
+        if (isValidEmail(e.target.value)) {
+            flag__email = 1
+            setValidFeedback(e.target)
+            block(document.querySelector("#register__form__email__feedback__valid"))
+            hide(document.querySelector("#register__form__email__feedback__invalid"))
+        }
+        else {
+            flag__email = 0
+            block(document.querySelector("#register__form__email__feedback__invalid"))
+            hide(document.querySelector("#register__form__email__feedback__valid"))
+            setInvalidFeedback(e.target)
+        }
+    })
+
+
+
+    document.querySelectorAll("#register__form__email__input, #register__form__pw__re__input, #register__form__pw__input, #register__form__id__input").forEach(ele => {
+        ele.addEventListener("keyup", () => {
+            if (flag__id && flag__unique__id && flag__pw && flag__pw__re && flag__email && flag__terms) {
+                document.querySelector("#register__form__submit").classList.remove("zuzu__btn__disabled")
+            }
+            else {
+                document.querySelector("#register__form__submit").classList.add("zuzu__btn__disabled")
+            }
+        })
+    })
+
+    document.querySelector("#register__form__option__terms__checkbox").addEventListener("click", (e) => {
+        if (flag__terms == 0) {
+            flag__terms = 1
+            document.querySelector("#register__form__option__terms__checkbox").classList.add("zuzu__checkbox__checked")
+        }
+        else if (flag__terms == 1) {
+            flag__terms = 0
+            document.querySelector("#register__form__option__terms__checkbox").classList.remove("zuzu__checkbox__checked")
+        }
+        if (flag__id && flag__unique__id && flag__pw && flag__pw__re && flag__email && flag__terms) {
+            document.querySelector("#register__form__submit").classList.remove("zuzu__btn__disabled")
+        }
+        else {
+            document.querySelector("#register__form__submit").classList.add("zuzu__btn__disabled")
+        }
+    })
+
+
+</script>
+
+<!-- check is id unique -->
+<script>
+    document.querySelector("#register__form__id__input__unique").addEventListener("click", () => {
+        if (flag__id) {
+            $.ajax({
+                url: "{% url 'accounts:check_unique_id' %}",
+                type: 'POST',
+                data: {
+                    user_id: document.querySelector("#register__form__id__input").value,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    if (data.msg == "success") {
+                        flag__unique__id = 1
+                        document.querySelector("#register__form__id__input").classList.add('zuzu__input__lock')
+                        document.querySelector("#register__form__id__input__unique").style.backgroundColor = "#5cbc73"
+                        Swal.fire({
+                            position: "top",
+                            icon: "success",
+                            title: "중복 확인 완료",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        })
+                    }
+                    else if (data.msg == "duplicate") {
+                        flag__unique__id = 0
+                        document.querySelector("#register__form__id__input__unique").style.backgroundColor = "#3B3B3B"
+                        Swal.fire({
+                            position: "top",
+                            icon: "error",
+                            title: "해당 아이디는 이미 사용하고 있습니다.",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        })
+                    }
+                },
+                error: function (error) {
+                    alert("에러 발생")
+                    console.log(error)
+                }
+            });
+        }
+
+    })
+</script>
+
+
+<!-- register new user -->
+<script>
+
+    document.querySelector("#register__form__submit").addEventListener("click", () => {
+        if (flag__id && flag__unique__id && flag__pw && flag__pw__re && flag__email && flag__terms) {
+            $.ajax({
+                type: 'POST',
+                data: {
+                    user_id: document.querySelector("#register__form__id__input").value,
+                    password: document.querySelector("#register__form__pw__input").value,
+                    email: document.querySelector("#register__form__email__input").value,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    if (data.msg == "success") {
+                        Swal.fire({
+                            icon: "success",
+                            title: "회원가입이 완료되었습니다",
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function () {
+                            window.location.href = '/';
+                        })
+                    }
+                    else if (data.msg == "error") {
+                        Swal.fire({
+                            position: "top",
+                            icon: "error",
+                            title: "예상치 못한 오류가 발생했습니다."
+                        }).then(function () {
+                            location.href = "/"
+                        })
+                    }
+                },
+                error: function (error) {
+                    Swal.fire({
+                        position: "top",
+                        icon: "error",
+                        title: "예상치 못한 오류가 발생했습니다."
+                    }).then(function () {
+                        location.href = "/"
+                    })
+                }
+            })
+        }
+    })
+    
+    console.log(flag__id,flag__unique__id)
+</script>
+
+
+{% endblock %}

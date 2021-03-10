@@ -1,0 +1,55 @@
+{% extends 'common/base.html' %}
+
+
+{% block content %}
+
+
+<div id="posts" class="zuzu__container">
+    
+    <div id="posts__title">
+        <div id="posts__title__img">
+            <img id="posts__title__img__style" src="/static/img/common/python.png" alt="" srcset="">
+        </div>
+        <div id="posts__title__text">
+            입력 / 출력
+        </div>
+    </div>
+
+<div id="posts__contents">
+
+{% for post in posts %}
+
+{{post.html|safe}}
+
+{% endfor %}
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+<script>
+
+    document.querySelectorAll(".posts__code__copy").forEach(element => {
+        element.addEventListener("click", function(e){
+            let tmp = e.target
+            let tempElem = document.createElement('textarea')
+            tempElem.value = e.target.parentNode.querySelector(".highlight > pre").innerText
+            document.body.appendChild(tempElem)
+            tempElem.select()
+            document.execCommand("copy")
+            document.body.removeChild(tempElem)
+        })
+    })
+
+</script>
+
+
+{% endblock %}
+
+

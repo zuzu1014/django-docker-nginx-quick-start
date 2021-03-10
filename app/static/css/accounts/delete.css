@@ -1,0 +1,43 @@
+/* css */
+/* responsive  */
+#delete {
+  margin: auto;
+  margin-top: 70px;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
+  padding: 50px 50px;
+  margin-bottom: 150px;
+  max-width: 700px;
+}
+
+#delete__title {
+  font-weight: 900;
+  font-size: 30px;
+  color: #22304f;
+}
+
+.delete__form__item__label {
+  margin-top: 60px;
+}
+
+#delete__form__submit {
+  width: 100%;
+  margin-top: 60px;
+  border-radius: 0.6rem;
+  background-color: #FAFBFC;
+  border: 1px solid lightgray;
+  color: #CB2431;
+}
+
+#delete__form__submit:hoveR {
+  background-color: #CB2431;
+  border: none;
+  color: #FAFBFC;
+}
+
+@media (max-width: 757px) {
+  #delete {
+    margin-top: 20px;
+  }
+}

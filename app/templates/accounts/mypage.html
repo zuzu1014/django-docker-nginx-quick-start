@@ -1,0 +1,44 @@
+{% extends 'common/base.html' %}
+
+
+{% block content %}
+<link rel="stylesheet" href="/static/css/accounts/mypage.css">
+
+
+<section id="mypage" class="zuzu__container">
+    <div id="mypage__tabs">
+        <div id="mypage__tabs__profile" class="mypage__tabs__item mypage__active"><i class="fas fa-user"></i></div>
+        <div id="mypage__tabs__feed" class="mypage__tabs__item"><i class="far fa-list-alt"></i></div>
+        <div id="mypage__tabs__notification" class="mypage__tabs__item"><i class="fas fa-cog"></i></div>
+    </div>
+
+    <div id="mypage__body">
+
+
+        <a href="/logout">
+            <div id="mypage__body__profile__logout" class="zuzu__btn">
+                로그아웃
+            </div>
+        </a>
+
+        <a href="/password-change">
+            <div id="mypage__body__profile__password" class="zuzu__btn">
+                비밀번호 변경
+            </div>
+        </a>
+
+        <a href="/delete">
+            <div id="mypage__body__profile__withdrawal" class="zuzu__btn">
+                회원 탈퇴
+            </div>
+        </a>
+    </div>
+    </div>
+</section>
+
+
+
+
+
+
+{% endblock content %}

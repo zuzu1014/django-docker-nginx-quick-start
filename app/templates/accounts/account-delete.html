@@ -1,0 +1,93 @@
+{% extends 'common/base.html' %}
+
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<link rel="stylesheet" href="/static/css/accounts/delete.css">
+
+<section id="delete" class="zuzu__container">
+    <div id="delete__title">회원 탈퇴</div>
+    <div id="delete__form">
+        <form>
+            {% csrf_token %}
+
+        </form>
+
+        <div id="delete__form__pw" class="delete__form__item">
+            <div class="delete__form__item__label">비밀번호</div>
+            <input type="password" style="margin-top: 10px;" id="delete__form__pw__input" class="zuzu__input"
+                type="delete" placeholder="비밀번호를 입력해 주세요." />
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="zuzu__btn" id="delete__form__submit">
+        탈퇴하기
+    </div>
+
+
+    </div>
+</section>
+
+
+<script>
+
+    const deleteUser = () => {
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            data: {
+                pw: document.querySelector("#delete__form__pw__input").value,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function (response) {
+                if (response.msg == "success") {
+                    Swal.fire({
+                        icon: "success",
+                        title: "회원 탈퇴가 완료되었습니다.<br>그동안 함께해 주셔서 감사합니다.",
+                    }).then(function () {
+                        location.href = "/"
+                    })
+                }
+                else if (response.msg == "pw-error") {
+                    Swal.fire("이런...", "비밀번호를 다시 확인해주세요.", "error")
+                    console.log(response)
+                }
+                else {
+                    Swal.fire("이런...", "예상치 못한 오류가 발생했습니다", "error")
+                    console.log(response)
+                }
+            },
+            error: function () {
+                Swal.fire("이런...", "예상치 못한 오류가 발생했습니다!", "error")
+            }
+        })
+    }
+
+    document.querySelector("#delete__form__submit").addEventListener("click", () => {
+        Swal.fire({
+            title: '회원 탈퇴를 하시겠습니까?',
+            showCancelButton: true,
+            confirmButtonText: `예`,
+            cancelButtonText: "아니오",
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                deleteUser()
+            }
+        })
+    })
+</script>
+
+
+
+
+
+
+
+{% endblock %}

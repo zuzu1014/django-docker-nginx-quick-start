@@ -1,0 +1,46 @@
+@import "../common/_settings.scss";
+
+
+#delete {
+    margin: auto;
+    margin-top: 70px;
+    border-radius: 0.5rem;
+    box-shadow: #{$box-shadow-mid};
+    padding: 50px 50px;
+    margin-bottom: 150px;
+    max-width: 700px;
+}
+
+
+#delete__title {
+    font-weight: 900;
+    font-size: 30px;
+    color: #{$color-black};
+}
+
+.delete__form__item__label{
+    margin-top: 60px;
+}
+
+
+#delete__form__submit{
+    width: 100%;
+    margin-top: 60px;
+    border-radius: 0.6rem;
+    background-color: #FAFBFC;
+    border: 1px solid lightgray;
+    color: #CB2431;
+}
+
+#delete__form__submit:hoveR{
+    background-color: #CB2431;
+    border: none;
+    color: #FAFBFC;
+}
+
+@include mobile{
+    #delete{
+        margin-top: 20px;
+    }
+
+}

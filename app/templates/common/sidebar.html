@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/static/css/common/sidebar.css">
+
+<div id="sidebar">
+    <div id="sidebar__close">
+        <div id="sidebar__close__icon">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+    </div>
+
+    <div id="sidebar__content">
+        <div class="sidebar__content__item"> <i class="fas fa-user"></i> &nbsp; 마이페이지</div>
+        <div class="sidebar__content__item"> <i class="fas fa-cog"></i> &nbsp; 설정</div>
+    </div>
+</div>
+
+
+<script>
+    document.querySelector("#header__sidebar__menu").addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelector("#sidebar").classList.toggle("show-sidebar")
+        if (document.querySelector("#sidebar").classList.contains('show-sidebar')) {
+            flex(sidebar)
+            document.querySelector("#sidebar").classList.remove('hide-sidebar')
+        }
+        else {
+            document.querySelector("#sidebar").classList.add("hide-sidebar")
+        }
+        block(document.querySelector("#layer"))
+    });
+    document.querySelector("#sidebar").addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+    document.querySelector('body, html').addEventListener('click', (e) => {
+        document.querySelector("#sidebar").classList.remove('show-sidebar')
+        document.querySelector("#sidebar").classList.add("hide-sidebar")
+        hide(document.querySelector("#layer"))
+    });
+
+    document.querySelector('#sidebar__close__icon').addEventListener('click', (e) => {
+        document.querySelector("#sidebar").classList.remove('show-sidebar')
+        document.querySelector("#sidebar").classList.add("hide-sidebar")
+        hide(document.querySelector("#layer"))
+    });
+
+</script>

@@ -1,0 +1,116 @@
+{% extends 'common/base.html' %}
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="stylesheet" href="/static/css/common/all.css">
+<link rel="stylesheet" href="/static/css/accounts/login.css">
+
+<div id="login" class="zuzu__container" >
+    <div id="login__form">
+        <div id="login__form__title">로그인</div>
+        <div id="login__form__input">
+            <form action="" autocomplete="off">
+                <input id="login__form__input__id" class="zuzu__input" type="text" placeholder="아이디"
+                    autocomplete="off" />
+                <input id="login__form__input__pw" class="zuzu__input" type="password" placeholder="비밀번호"
+                    autocomplete="off" />
+            </form>
+        </div>
+        <div id="login__form__option">
+            <div id="login__form__option__remember">
+                <div class="item zuzu__checkbox zuzu__checkbox__checked" onclick="clickCheckbox(this)">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div> &nbsp;&nbsp;아이디 저장</div>
+            </div>
+            <div id="login__form__option__forget">
+                <a href="/password-change" style="color: darkgray;">
+                    비밀번호 찾기
+                </a>
+            </div>
+        </div>
+
+        <div id="login__form__submit" class="zuzu__btn">로그인</div>
+
+
+        <div id="login__form__yet">
+            우리가 처음인가요?
+            <a href="/register">
+                <div id="login__form__yet__register">&nbsp;&nbsp;회원가입</div>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const clickCheckbox = (ele) => {
+        ele.classList.toggle("zuzu__checkbox__checked")
+    }
+</script>
+
+<script>
+
+    const login = () => {
+        if (document.querySelector("#login__form__input__id").value != "" && document.querySelector("#login__form__input__pw").value != "") {
+            $.ajax({
+                type: 'POST',
+                data: {
+                    user_id: document.querySelector("#login__form__input__id").value,
+                    password: document.querySelector("#login__form__input__pw").value,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    if (data.msg == "success") {
+                        window.location.href = '/';
+                    }
+                    else if (data.msg == "mismatch") {
+                        Swal.fire({
+                            position: "top",
+                            icon: "error",
+                            title: "아이디와 비밀번호를 다시 확인해 주세요."
+                        })
+                    }
+                    else {
+                        Swal.fire({
+                            position: "top",
+                            icon: "error",
+                            title: "예상치 못한 오류가 발생했습니다."
+                        })
+                    }
+                },
+                error: function (error) {
+                    Swal.fire({
+                        position: "top",
+                        icon: "error",
+                        title: "예상치 못한 오류가 발생했습니다."
+                    }).then(function () {
+                        location.href = "/"
+                    })
+                }
+            })
+        }
+
+        else {
+            Swal.fire({
+                position: "top",
+                icon: "info",
+                title: "아이디와 비밀번호를 입력하세요."
+            })
+        }
+
+    }
+
+    document.querySelector("#login__form__submit").addEventListener("click", () => {
+        login()
+    })
+
+    document.querySelector('body').addEventListener('keyup', function (e) {
+        if (e.keyCode === 13) {
+            login()
+        }
+    });
+</script>
+
+
+{% endblock %}

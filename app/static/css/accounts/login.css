@@ -1,0 +1,129 @@
+/* css */
+/* responsive  */
+#login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 150px;
+  max-width: 700px;
+}
+
+#login__form {
+  margin: 0 auto;
+  margin-top: 0;
+  width: 80%;
+}
+
+/* TITLE */
+#login__form__title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1d2943;
+}
+
+/* INPUT */
+#login__form__input {
+  margin: auto;
+  width: 100%;
+}
+
+#login__form__input__id {
+  margin-top: 20px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#login__form__input__pw {
+  margin-top: 2%;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#login__form__option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 10px;
+}
+
+#login__form__option__remember {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 5px;
+  font-size: 0.8rem;
+}
+
+#login__form__option__remember__checkbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#login__form__option__remember__checkbox__icon {
+  color: white;
+  font-size: 7px;
+}
+
+#login__form__option__forget {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 0 0 auto;
+  cursor: pointer;
+}
+
+#login__form__forget {
+  text-align: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+#login__form__yet {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: darkgray;
+  margin-top: 15px;
+  margin-left: 5px;
+  font-size: 0.9rem;
+}
+
+#login__form__yet__register {
+  font-weight: 700;
+  color: #4678F8;
+}
+
+#login__form__submit {
+  margin-top: 30px;
+}
+
+@media (max-width: 757px) {
+  #login {
+    margin-top: 20px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 758px) and (max-width: 1024px) {
+  #login {
+    max-width: 75vw;
+  }
+}
