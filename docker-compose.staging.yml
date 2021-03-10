@@ -5,9 +5,9 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile.prod
-    command: gunicorn hello_django.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn pyhelper.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - static_volume:/home/app/web/staticfiles
+      - static_volume:/home/app/web/.static
       - media_volume:/home/app/web/mediafiles
     expose:
       - 8000
@@ -29,7 +29,7 @@ services:
       - 443:443
       - 80:80
     volumes:
-      - static_volume:/home/app/web/staticfiles
+      - static_volume:/home/app/web/.static
       - media_volume:/home/app/web/mediafiles
       - certs:/etc/nginx/certs
       - html:/usr/share/nginx/html
